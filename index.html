@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Vanshika! 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --pink: #FF6B9D;
+    --yellow: #FFD93D;
+    --mint: #6BCB77;
+    --purple: #C77DFF;
+    --coral: #FF8E53;
+    --blue: #4ECDC4;
+    --white: #FFFDF7;
+  }
+  body { background: var(--white); font-family: 'Nunito', sans-serif; overflow-x: hidden; cursor: none; }
+  .cursor { width: 20px; height: 20px; background: var(--pink); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s, background 0.3s; mix-blend-mode: multiply; }
+  #confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; background: linear-gradient(135deg, #FFF0F5 0%, #FFF8E7 50%, #F0FFF4 100%); overflow: hidden; }
+  .shape { position: absolute; border-radius: 50%; opacity: 0.15; animation: floatUp linear infinite; }
+  @keyframes floatUp { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.15; } 90% { opacity: 0.15; } 100% { transform: translateY(-100px) rotate(720deg); opacity: 0; } }
+  .age-badge { background: var(--yellow); color: #333; font-size: 1rem; font-weight: 800; padding: 0.5rem 1.5rem; border-radius: 50px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block; animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; box-shadow: 0 4px 15px rgba(255,217,61,0.4); }
+  @keyframes bounceIn { 0% { transform: scale(0) rotate(-10deg); opacity: 0; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
+  .hero h1 { font-family: 'Pacifico', cursive; font-size: clamp(3rem, 10vw, 7rem); line-height: 1.1; margin-bottom: 0.5rem; animation: slideUp 0.8s ease forwards 0.2s; opacity: 0; }
+  .hero h1 .line1 { color: var(--pink); }
+  .hero h1 .line2 { color: var(--purple); }
+  .hero-name { font-family: 'Pacifico', cursive; font-size: clamp(2.5rem, 8vw, 5.5rem); color: var(--coral); margin-bottom: 1.5rem; animation: slideUp 0.8s ease forwards 0.4s; opacity: 0; text-shadow: 4px 4px 0px rgba(255,142,83,0.2); }
+  .emoji-row { font-size: 2.5rem; margin-bottom: 2rem; animation: slideUp 0.8s ease forwards 0.6s; opacity: 0; display: flex; gap: 0.5rem; justify-content: center; }
+  .emoji-row span { display: inline-block; animation: wiggle 1s ease-in-out infinite; }
+  .emoji-row span:nth-child(2) { animation-delay: 0.1s; }
+  .emoji-row span:nth-child(3) { animation-delay: 0.2s; }
+  .emoji-row span:nth-child(4) { animation-delay: 0.3s; }
+  .emoji-row span:nth-child(5) { animation-delay: 0.4s; }
+  @keyframes wiggle { 0%, 100% { transform: rotate(-5deg) scale(1); } 50% { transform: rotate(5deg) scale(1.15); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid white; box-shadow: 0 10px 30px rgba(255,107,157,0.3); margin-bottom: 1.5rem; animation: slideUp 0.8s ease forwards 0.3s; opacity: 0; }
+  .hero-msg { font-size: 1.1rem; color: #666; max-width: 500px; line-height: 1.7; animation: slideUp 0.8s ease forwards 0.8s; opacity: 0; font-weight: 600; }
+  .party-btn { display: inline-block; margin-top: 2rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; border: none; border-radius: 50px; cursor: pointer; letter-spacing: 0.05em; box-shadow: 0 8px 25px rgba(255,107,157,0.4); transition: transform 0.2s, box-shadow 0.2s; animation: slideUp 0.8s ease forwards 1s; opacity: 0; }
+  .party-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 12px 30px rgba(255,107,157,0.5); }
+  .scroll-hint { position: absolute; bottom: 2rem; font-size: 0.85rem; color: #aaa; animation: bounce 2s ease infinite; font-weight: 700; letter-spacing: 0.1em; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  /* PHOTO STRIP */
+  .photo-strip { padding: 3rem 2rem; background: white; overflow: hidden; }
+  .strip-title { font-family: 'Pacifico', cursive; font-size: 1.5rem; color: var(--pink); text-align: center; margin-bottom: 2rem; }
+  .strip-scroll { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .strip-scroll::-webkit-scrollbar { height: 4px; }
+  .strip-scroll::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 2px; }
+  .strip-photo { flex: 0 0 260px; height: 320px; border-radius: 16px; overflow: hidden; scroll-snap-align: start; position: relative; box-shadow: 0 8px 24px rgba(0,0,0,0.1); transition: transform 0.3s; }
+  .strip-photo:hover { transform: scale(1.03) rotate(1deg); }
+  .strip-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .strip-photo .photo-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.5)); color: white; font-size: 0.85rem; font-weight: 700; padding: 1rem 0.75rem 0.75rem; }
+
+  /* CARDS */
+  .cards-section { padding: 5rem 2rem; background: linear-gradient(135deg, #FFF0F5, #FFF8E7); }
+  .section-title { font-family: 'Pacifico', cursive; font-size: clamp(1.8rem, 4vw, 2.8rem); text-align: center; margin-bottom: 3rem; color: var(--purple); }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+  .card { padding: 2rem; border-radius: 20px; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default; }
+  .card:hover { transform: translateY(-8px) rotate(1deg); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .card:nth-child(1) { background: linear-gradient(135deg, #FFE0EC, #FFB3CC); }
+  .card:nth-child(2) { background: linear-gradient(135deg, #FFF3CC, #FFE066); }
+  .card:nth-child(3) { background: linear-gradient(135deg, #E0F7FA, #80DEEA); }
+  .card:nth-child(4) { background: linear-gradient(135deg, #F3E5FF, #CE93D8); }
+  .card:nth-child(5) { background: linear-gradient(135deg, #E8F5E9, #A5D6A7); }
+  .card:nth-child(6) { background: linear-gradient(135deg, #FFF3E0, #FFCC80); }
+  .card-emoji { font-size: 3rem; margin-bottom: 0.75rem; display: block; }
+  .card h3 { font-size: 1.1rem; font-weight: 800; color: #333; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.9rem; color: #555; line-height: 1.5; font-weight: 600; }
+
+  /* SCATTERED PHOTOS */
+  .scatter-section { padding: 4rem 2rem; background: white; }
+  .scatter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 700px; margin: 0 auto; }
+  .scatter-photo { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.1); transition: transform 0.3s; position: relative; }
+  .scatter-photo:hover { transform: rotate(-2deg) scale(1.03); }
+  .scatter-photo:nth-child(even):hover { transform: rotate(2deg) scale(1.03); }
+  .scatter-photo img { width: 100%; height: 280px; object-fit: cover; display: block; }
+  .scatter-photo .photo-caption { text-align: center; padding: 0.75rem; font-weight: 700; font-size: 0.85rem; color: #888; }
+
+  /* POEM */
+  .poem-section { padding: 5rem 2rem; background: linear-gradient(135deg, #FFE0F0, #FFF0FF); text-align: center; position: relative; overflow: hidden; }
+  .poem-section::before { content: '🎂'; font-size: 10rem; position: absolute; top: -2rem; left: -2rem; opacity: 0.06; }
+  .poem-section::after { content: '🎉'; font-size: 10rem; position: absolute; bottom: -2rem; right: -2rem; opacity: 0.06; }
+  .poem-box { max-width: 650px; margin: 0 auto; background: white; border-radius: 24px; padding: 3rem; box-shadow: 0 20px 60px rgba(255,107,157,0.15); position: relative; z-index: 1; }
+  .poem-box h2 { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--pink); margin-bottom: 2rem; }
+  .poem-box p { font-size: 1.05rem; line-height: 2; color: #555; font-weight: 600; margin-bottom: 1rem; }
+  .poem-box p:last-of-type { margin-bottom: 0; }
+  .signature { margin-top: 2rem; font-family: 'Pacifico', cursive; font-size: 1.3rem; color: var(--coral); }
+
+  /* 22 SECTION */
+  .number-section { padding: 4rem 2rem; background: var(--pink); text-align: center; position: relative; overflow: hidden; }
+  .big-number { font-family: 'Pacifico', cursive; font-size: clamp(8rem, 25vw, 18rem); color: rgba(255,255,255,0.15); line-height: 1; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .number-content { position: relative; z-index: 1; }
+  .number-content h2 { font-family: 'Pacifico', cursive; font-size: clamp(2rem, 5vw, 3.5rem); color: white; margin-bottom: 1rem; }
+  .number-content p { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 500px; margin: 0 auto; font-weight: 600; line-height: 1.7; }
+  .number-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 5px solid rgba(255,255,255,0.5); margin: 2rem auto 0; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+  /* FOOTER */
+  .bday-footer { padding: 3rem 2rem; background: #1a1a1a; text-align: center; }
+  .footer-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--yellow); margin: 0 auto 1.5rem; display: block; }
+  .bday-footer p { font-family: 'Pacifico', cursive; font-size: 1.5rem; color: var(--yellow); margin-bottom: 0.5rem; }
+  .bday-footer small { font-size: 0.85rem; color: #666; font-weight: 600; }
+
+  /* BALLOONS */
+  .balloon { position: fixed; font-size: 3rem; animation: riseUp linear infinite; pointer-events: none; z-index: 50; opacity: 0; }
+  @keyframes riseUp { 0% { transform: translateY(110vh) rotate(-10deg); opacity: 0; } 5% { opacity: 1; } 95% { opacity: 1; } 100% { transform: translateY(-20vh) rotate(10deg); opacity: 0; } }
+
+  /* SCRAPBOOK FLOATS */
+  .scrap-float { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 2rem auto; max-width: 800px; }
+  .scrap-pic { background: white; padding: 0.75rem 0.75rem 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.12); border-radius: 2px; transform: rotate(-3deg); transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+  .scrap-pic:nth-child(even) { transform: rotate(2.5deg); }
+  .scrap-pic:hover { transform: rotate(0deg) scale(1.05); box-shadow: 0 12px 35px rgba(0,0,0,0.18); z-index: 5; }
+  .scrap-pic img { width: 180px; height: 220px; object-fit: cover; display: block; }
+  .scrap-pic .tape { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 20px; background: rgba(255,217,61,0.6); border-radius: 2px; }
+  .scrap-pic .pic-note { text-align: center; font-size: 0.75rem; font-weight: 700; color: #888; margin-top: 0.4rem; font-style: italic; }
+  .scrap-inline { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; margin: 2.5rem auto 0; }
+  .scrap-sm { background: white; padding: 0.6rem 0.6rem 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.12); transform: rotate(-2deg); transition: transform 0.3s; }
+  .scrap-sm:nth-child(even) { transform: rotate(2deg); }
+  .scrap-sm:hover { transform: rotate(0deg) scale(1.06); }
+  .scrap-sm img { width: 130px; height: 160px; object-fit: cover; display: block; }
+  .scrap-sm .pic-note { text-align: center; font-size: 0.7rem; font-weight: 700; color: #888; margin-top: 0.3rem; font-style: italic; }
+  .scrap-sm { position: relative; }
+  .scrap-sm::before { content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 40px; height: 16px; background: rgba(199,125,255,0.5); border-radius: 2px; }
+  .poem-photos { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+  .poem-photos .scrap-sm img { width: 110px; height: 140px; }
+
+  @media (max-width: 600px) {
+    .scatter-grid { grid-template-columns: 1fr; }
+    .strip-photo { flex: 0 0 200px; height: 250px; }
+    .scrap-pic img { width: 140px; height: 175px; }
+    .scrap-sm img { width: 100px; height: 125px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<canvas id="confetti"></canvas>
+
+<div class="balloon" style="left:5%; animation-duration:8s; animation-delay:0s;">🎈</div>
+<div class="balloon" style="left:15%; animation-duration:10s; animation-delay:2s;">🎀</div>
+<div class="balloon" style="left:80%; animation-duration:9s; animation-delay:1s;">🎈</div>
+<div class="balloon" style="left:90%; animation-duration:11s; animation-delay:3s;">🎉</div>
+<div class="balloon" style="left:50%; animation-duration:7s; animation-delay:4s;">🎊</div>
+<div class="balloon" style="left:35%; animation-duration:12s; animation-delay:1.5s;">🎈</div>
+<div class="balloon" style="left:65%; animation-duration:8.5s; animation-delay:5s;">🎀</div>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="sunny pink selfie.jpeg" alt="Vanshika" class="hero-photo">
+  <div class="age-badge">✨ Turning 22 Today ✨</div>
+  <h1>
+    <span class="line1">Happy</span><br>
+    <span class="line2">Birthday</span>
+  </h1>
+  <div class="hero-name">Vanshika! 🎂</div>
+  <div class="emoji-row">
+    <span>🎉</span><span>🌸</span><span>✨</span><span>🎊</span><span>💕</span>
+  </div>
+  <p class="hero-msg">Today the world is a little brighter, a little louder, and a whole lot more fabulous — because it's YOUR day!</p>
+  <button class="party-btn" onclick="launchConfetti()">🎊 Let's Party!</button>
+
+  <div class="scrap-float" style="margin-top:2.5rem;">
+    <div class="scrap-pic">
+      <div class="tape"></div>
+      <img src="instagram solo.jpeg" alt="Vanshika">
+      <div class="pic-note">slaying as always 💅</div>
+    </div>
+    <div class="scrap-pic">
+      <div class="tape"></div>
+      <img src="cute smile.jpeg" alt="Vanshika">
+      <div class="pic-note">my favourite smile ☀️</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">↓ scroll for more ↓</div>
+</section>
+
+<!-- PHOTO STRIP -->
+<section class="photo-strip">
+  <div class="strip-title">📸 Us through the years</div>
+  <div class="strip-scroll">
+    <div class="strip-photo">
+      <img src="dog filter selfie.jpeg" alt="Sisters">
+      <div class="photo-label">🐶 Always silly together</div>
+    </div>
+    <div class="strip-photo">
+      <img src="hug and kiss.jpeg" alt="Sisters">
+      <div class="photo-label">💕 My favourite person</div>
+    </div>
+    <div class="strip-photo">
+      <img src="black and white hearts.jpeg" alt="Sisters">
+      <div class="photo-label">🖤 Always by your side</div>
+    </div>
+    <div class="strip-photo">
+      <img src="sunny pink selfie.jpeg" alt="Sisters">
+      <div class="photo-label">🌸 sunshine sisters</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="cards-section">
+  <h2 class="section-title">22 looks good on you because...</h2>
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-emoji">💫</span>
+      <h3>You light up every room</h3>
+      <p>Your energy is contagious and everyone around you feels it</p>
+    </div>
+    <div class="card">
+      <span class="card-emoji">🌸</span>
+      <h3>You bloom beautifully</h3>
+      <p>Every year you grow into someone even more wonderful</p>
+    </div>
+    <div class="card">
+      <span class="card-emoji">💪</span>
+      <h3>You are stronger than you know</h3>
+      <p>You handle everything life throws at you with grace</p>
+    </div>
+    <div class="card">
+      <span class="card-emoji">😂</span>
+      <h3>Your laugh is everything</h3>
+      <p>It genuinely makes any day ten times better</p>
+    </div>
+    <div class="card">
+      <span class="card-emoji">🌟</span>
+      <h3>You are one of a kind</h3>
+      <p>There is truly nobody else quite like you in this world</p>
+    </div>
+    <div class="card">
+      <span class="card-emoji">❤️</span>
+      <h3>You are deeply loved</h3>
+      <p>More than words can say — today and every day</p>
+    </div>
+  </div>
+
+  <div class="scrap-inline">
+    <div class="scrap-sm"><img src="sunny pink selfie.jpeg" alt="Vanshika"><div class="pic-note">✨ sunshine</div></div>
+    <div class="scrap-sm"><img src="hug and kiss.jpeg" alt="Sisters"><div class="pic-note">💕 us</div></div>
+    <div class="scrap-sm"><img src="black and white hearts.jpeg" alt="Sisters"><div class="pic-note">🖤 always</div></div>
+  </div>
+</section>
+
+<!-- SCATTERED PHOTOS -->
+<section class="scatter-section">
+  <h2 class="section-title" style="color: var(--coral);">Moments I treasure 💛</h2>
+  <div class="scatter-grid">
+    <div class="scatter-photo">
+      <img src="instagram solo.jpeg" alt="Vanshika">
+      <div class="photo-caption">Always so beautiful ✨</div>
+    </div>
+    <div class="scatter-photo">
+      <img src="cute smile.jpeg" alt="Vanshika">
+      <div class="photo-caption">That smile though 😍</div>
+    </div>
+    <div class="scatter-photo">
+      <img src="hug and kiss.jpeg" alt="Sisters">
+      <div class="photo-caption">Us, always 💕</div>
+    </div>
+    <div class="scatter-photo">
+      <img src="black and white hearts.jpeg" alt="Sisters">
+      <div class="photo-caption">Every adventure together 🖤</div>
+    </div>
+  </div>
+</section>
+
+<!-- POEM -->
+<section class="poem-section">
+  <div class="poem-box">
+    <h2>A little poem for you 🎂</h2>
+    <p>Happy Birthday, Vanshika!<br>
+    Twenty-two looks good on you, I must say,<br>
+    Welcome to the age where you're finally halfway<br>
+    Between "I have no clue what I'm doing in life"<br>
+    And "I still have no clue, but I smile through the strife!"</p>
+    <p>You're no longer a teen, but not quite grown up,<br>
+    Still figuring out the world, one day at a cup.<br>
+    Twenty-two is the age of adventure and fun,<br>
+    Of chasing your dreams till they're finally done.</p>
+    <p>So here's to you, Vanshika, fresh twenty-two,<br>
+    The best is still coming, I promise it's true.<br>
+    Happy birthday, dear sister, go make it your year —<br>
+    You've got all my love and a whole lot of cheer! 🎂</p>
+    <div class="signature">— Mehak 💕</div>
+
+    <div class="poem-photos">
+      <div class="scrap-sm"><img src="dog filter selfie.jpeg" alt="Sisters"><div class="pic-note">🐶 hehe</div></div>
+      <div class="scrap-sm"><img src="instagram solo.jpeg" alt="Vanshika"><div class="pic-note">📸 icon</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 22 SECTION -->
+<section class="number-section">
+  <div class="big-number">22</div>
+  <div class="number-content">
+    <h2>Hello, 22! 🎂</h2>
+    <p>This is your year to be bolder, brighter and more unapologetically yourself. The best chapters of your story are still being written. 💫</p>
+    <img src="dog filter selfie.jpeg" alt="Sisters" class="number-photo">
+    <div class="scrap-inline" style="margin-top:1.5rem;">
+      <div class="scrap-sm" style="--r:-3deg;"><img src="cute smile.jpeg" alt="Vanshika"><div class="pic-note">glowing 🌟</div></div>
+      <div class="scrap-sm"><img src="hug and kiss.jpeg" alt="Sisters"><div class="pic-note">sisters 💕</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bday-footer">
+  <img src="sunny pink selfie.jpeg" alt="Vanshika" class="footer-photo">
+  <p>Happy Birthday Vanshika! 🎉</p>
+  <small>Made with love by your sister Mehak 💕 &middot; 21st May 2026</small>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+
+  const colors = ['#FF6B9D','#FFD93D','#6BCB77','#C77DFF','#FF8E53','#4ECDC4'];
+  for (let i = 0; i < 15; i++) {
+    const shape = document.createElement('div');
+    shape.className = 'shape';
+    const size = Math.random() * 80 + 20;
+    shape.style.cssText = `width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}%;animation-duration:${Math.random()*10+8}s;animation-delay:${Math.random()*5}s;`;
+    document.querySelector('.hero').appendChild(shape);
+  }
+
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+  let particles = [];
+  let animating = false;
+
+  function launchConfetti() {
+    particles = [];
+    for (let i = 0; i < 200; i++) {
+      particles.push({
+        x: Math.random() * canvas.width, y: -10,
+        w: Math.random() * 10 + 5, h: Math.random() * 6 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360, rotSpeed: (Math.random() - 0.5) * 8,
+        vx: (Math.random() - 0.5) * 4, vy: Math.random() * 4 + 2, opacity: 1
+      });
+    }
+    if (!animating) { animating = true; animateConfetti(); }
+  }
+
+  function animateConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(p => p.opacity > 0);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.rotation += p.rotSpeed;
+      if (p.y > canvas.height * 0.8) p.opacity -= 0.02;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation * Math.PI / 180);
+      ctx.globalAlpha = p.opacity;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+    });
+    if (particles.length > 0) requestAnimationFrame(animateConfetti);
+    else { animating = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+  }
+
+  window.addEventListener('load', () => setTimeout(launchConfetti, 1000));
+</script>
+</body>
+</html>
